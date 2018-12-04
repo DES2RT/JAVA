@@ -1,238 +1,79 @@
-package course;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.io.Serializable;
 
-/**
- * @author written by: Dale Stewart
- * 023567902
- * June 20 2016
- * */
+//package student;
 
-
-public abstract class Student implements Calculable, Cloneable, Runnable {
-	/** student first name */
-	String givenName;
-	/** student surname */
-	String surName;
-	/** student id number */
-	int id;
-	/** student address */
-	public Address address;
-    public List<Course> courses = new ArrayList<Course>();
+public class Student implements Serializable, Cloneable {
+	private String name;
+	private int number;
+	private int mark;
+	private char grade;
 	
-	/** Address class forms address object for student */
-	public static class Address implements Cloneable {
-		int number;
-		String street;
-		String city;
-		String province;
-		String postcode;
-		
-		// Address class methods
-		/** no argument constructor set values to null */
-		Address() {
-			this.number = 0;
-			this.street = null;
-			this.city = null;
-			this.province = null;
-			this.postcode = null;
-		}		
-		
-		/** 5 argument constructor sets values to those passed in */
-		Address(int no, String st, String c, String p, String pc) {
-			number = no;
-			street = st;
-			city = c;
-			province = p;
-			postcode = pc;
-		}
-
-        /** @return street number*/
-        public int getStreetNumber() {
-            return number;
-        }
-
-        /**set street number 
-         * @param name: Address street number */
-        public void setStreetNumber(int streetNumber) {
-        	number = streetNumber;
-        }
-        /** @return street name */
-        public String getStreetName() {
-        	return street;
-        }
-        
-        /** set street number
-         * @param name: Address street name */
-        public void setStreetName(String name) {
-        	street = name;
-        }
-        
-        /** @return city name*/
-        public String getCity() {
-            return city;
-        }
-        /**set city name 
-         * @param name: city */
-        public void setCity(String city) {
-            this.city = city;
-        }
-        
-        /** @return province name*/
-        public String getProvince() {
-            return province;
-        }
-        
-        /** set province name 
-         * @param name: province */
-        public void setProvince(String prov) {
-            province = prov;
-        }
-        
-        /**  @return Postal Code*/
-        public String getPostCode() {
-            return postcode;
-        }
-        
-        /** set postal code  
-         * @param name: postal code */
-        public void setPostCode(String pc) {
-            postcode = pc;;
-        }
-
-        /** @return Address as a string */
-		@Override
-		public String toString() {
-			return "" + number + " " + street + "\n " + city + ", " + province + ", " + postcode;
-		}		
-		
-		/** @return boolean dependent on objects being equal */
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			return true;
-		}		
-		
-		/** @return a duplicate 'clone' of the current object */
-		@Override
-		protected Object clone() throws CloneNotSupportedException {
-		  return super.clone();
-		}
-	}	// end Address class
-	
-	// Student class methods
-	Student() {
-		this.givenName = null;
-		this.surName = null;
-		this.id = 0;
-		this.address = null;
-		this.courses = null;
+	Student(String n, int num) {
+		this.name = n;
+		this.number = num;
+		this.mark = 0;
+		this.grade = ' ';
 	}
-	
-	// 5 argument constructor sets values to those passed in */
-	Student(String gn, String sn,  int id, List<Course> c, Address addy) {
-		givenName = gn;
-		surName = sn;
-		this.id = id;
-		courses = c;
-		address = addy;
+	public void setName(String n) {
+		this.name = n;
 	}
-	
-	/** @return price of books for a course */
-	public double BooksPrice(List<Course> semesterCourses) {
-		double total = 0.00;
-        for (Course course : semesterCourses ) {
-            total += course.getBookPrice(); // getting total cost of books in each course
-        }
-		return total;
+	public String getName() {
+		return this.name;
 	}
-
-    /* public getters and setters */
-    /** @return student given name */
-    public String getGivenName() {
-        return givenName;
-    }
-
-    /**set student name
-     * @param name: student given name */
-    public void setGivenName(String name) {
-        givenName = name;
-    }
-    
-    /** @return student surname */
-    public String getSurname() {
-        return surName;
-    }
-
-    /**set student surname  
-     * @param name: surName*/
-    public void setSurname(String name) {
-        surName = name;
-    }
-    
-    /** @return student ID */
-    public int getId() {
-        return id;
-    }
-
-    /**set student ID 
-     * @param name: Student ID */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /** @return List of courses taken by the student in one semester*/
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-    /** @return Student's address*/
-    public Address getAddress() {
-        return address;
-    }
-
-    /**sets student's address 
-     * @param name: Address */
-    public void setAddress(Address Address) {
-        address = Address;
-    }
-
-    /** sets List of Courses taken by a student in one semester 
-     * @param name: courses */
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
-    }
-
-    /** @return Student object as a string */
+	public void setNumber(int num) {
+		this.number = num;
+	}
+	public int getNumber() {
+		return this.number;
+	}
+	public void setMark(int m) {
+		this.mark = m;
+		System.out.println("Set mark = to " + this.mark);
+	}
+	public int getMark() {
+		return this.mark;
+	}
+	public void setGrade(char g) {
+		this.grade = g;
+	}
+	public char getGrade(int mark) {
+		char g = ' ';
+		if(mark<50) g = 'F';
+		if(mark>50 && mark<60) g = 'D';	
+		if(mark>60 && mark<70) g = 'C';	
+		if(mark>70 && mark<80) g = 'B';	
+		if(mark>80 && mark<=100) g = 'A';	
+		System.out.println("Grade is: " + g);
+		return g;
+	}
 	@Override
 	public String toString() {
-		System.out.println("Hello, my name is " + givenName + " " + surName + ". My student id is " + id + ". \n"
-				+ "My address is: " + address + ". \nI'm enrolled in courses: " + courses.toString());
-
-		return "";
-	}	
-	
-	/** @return boolean true/false dependent on whether objects are the same */
+		String string;
+		string = String.format("%s : Name: %s, Number: %d, Mark: %d, Grade: %c", 
+				this.getClass(), this.getName(), this.getNumber(), this.getMark(), this.getGrade(this.getMark()));
+		return string;
+	}
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		if(this == obj) return true;
+		if(!(obj instanceof Student)) return false;
+		Student s = (Student) obj;
+		if(name != s.name) return false;
+		if(number != s.number) return false;
+		if(mark != s.mark) return false;
+		if(grade != s.grade) return false;
+		
 		return true;
-	}	
-	
-	/** @returns a duplicate 'clone' of the current object */
-	  @Override
-	  protected Object clone() throws CloneNotSupportedException {
-	    return super.clone();
-	  }
-}	// end Student class
+	}
+	@Override
+	public int hashCode() {
+		int value = name.hashCode();
+		value = 88 * value + name.hashCode();
+		return value;
+	}
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
+
+}

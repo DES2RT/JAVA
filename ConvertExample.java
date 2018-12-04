@@ -1,0 +1,17 @@
+package prac;
+
+public class ConvertExample {
+
+	public static void transform(Convert<Integer, String> f, Integer i, String s) {
+		System.out.println(f.change(i, s));
+	}
+
+	public static void main(String[] args) {
+
+		transform(
+		(Integer i, String s) -> { return String.valueOf((char) (s.charAt(0) + i));}, 
+		2, 
+		"a"
+		);
+	}
+}
